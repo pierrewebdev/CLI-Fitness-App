@@ -1,3 +1,5 @@
-class Model2 < ActiveRecord::Base
+class RepTracker < ActiveRecord::Base
   # add associatons!
+  belongs_to :lifter
+  belongs_to :exercise
 end
