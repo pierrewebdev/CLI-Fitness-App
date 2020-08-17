@@ -1,5 +1,5 @@
 class Exercise < ActiveRecord::Base
   # add associatons!
-  has_many :rep_trackers
-  has_many :lifters, through: :rep_trackers
+  has_many :exercise_logs
+  has_many :lifters, through: :exercise_logs
 end
