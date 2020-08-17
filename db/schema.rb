@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_230730) do
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
+    t.string "target_muscle_group"
   end
 
   create_table "lifters", force: :cascade do |t|
