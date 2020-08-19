@@ -1,7 +1,6 @@
 class CreateExerciseLogs < ActiveRecord::Migration[5.2]
   def change
     create_table :exercise_logs do |t|
-      t.integer :max_num_of_reps
       t.datetime :date_and_time
       t.integer :lifter_id
       t.integer :exercise_id

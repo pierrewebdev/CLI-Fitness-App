@@ -15,22 +15,26 @@ josh_exercises = [ #just keep it simple for now
     {
         name:"Bench Press",
         target_muscle_group: "chest",
-        weight_in_pounds: 300
+        weight_in_pounds: 300,
+        reps:5
     },
     {
         name:"Deadlift",
         target_muscle_group: "lower back",
-        weight_in_pounds: 350
+        weight_in_pounds: 350,
+        reps:5
     },
     {
         name:"Barbell Rows",
         target_muscle_group: "upper back",
-        weight_in_pounds: 200
+        weight_in_pounds: 200,
+        reps:5
     },
     {
         name: "Barbell Squats",
         target_muscle_group: "legs",
-        weight_in_pounds:275
+        weight_in_pounds:275,
+        reps:5
     }
 ]
 
@@ -40,22 +44,26 @@ patrick_exercises = [
 {
     name:"Weighted Pull up",
     target_muscle_group: "chest",
-    weight_in_pounds: 200
+    weight_in_pounds: 200,
+    reps:8,
 },
 {
     name:"Weighted Dips",
     target_muscle_group: "triceps",
-    weight_in_pounds: 200
+    weight_in_pounds: 200,
+    reps:8
 },
 {
     name:"Barbell Rows",
     target_muscle_group: "upper back",
-    weight_in_pounds: 165
+    weight_in_pounds: 165,
+    reps:8
 },
 {
     name: " Barbell Squats",
     target_muscle_group: "legs",
-    weight_in_pounds: 225
+    weight_in_pounds: 225,
+    reps:8
 }
 ]
 
@@ -65,55 +73,117 @@ john_exercises = [ #just keep it simple for now
 {
     name:"Dumbell press",
     target_muscle_group: "chest",
-    weight_in_pounds:60
+    weight_in_pounds:60,
+    reps:2,
 },
 {
     name:"Deadlift",
     target_muscle_group: "lower back",
-    weight_in_pounds:80
+    weight_in_pounds:80,
+    reps:2
 },
 {
     name:"Lat Pulldown",
     target_muscle_group: "upper back",
-    weight_in_pounds:25
+    weight_in_pounds:25,
+    reps:8
 },
 {
     name: "Body Squat",
     target_muscle_group: "legs",
-    weight_in_pounds:120
+    weight_in_pounds:120,
+    reps:5
 }
 ]
 
 #Now I need to create a few mwthods that can help me dynamically add things to my database
 #the good thing about doing it this way is that I can reuse the code in all my model files for new users
 
+#helper methods for my #add_lifter_and_exercise_to_log
 def create_lifter_instance(name)
     lifter = Lifter.create(name:name)
     lifter
-    binding.pry
+end #this works
+
+def create_exercise_instance(exercise_info_hash)
+    exercise = Exercise.create(
+        name:exercise_info_hash[:name],
+        target_muscle_group:exercise_info_hash[:target_muscle_group],
+        weight_in_pounds:exercise_info_hash[:weight_in_pounds],
+        reps:exercise_info_hash[:reps])
+    exercise
+end #this works
+
+
+#this method takes in a lifter, an array of exercises, a maximum
+def add_lifter_and_exercise_to_log(lifter_name_string, exercise_info_hash)
+    if !Lifter.find_by(name:lifter_name_string)
+        lifter = create_lifter_instance(lifter_name_string)
+    else
+        lifter = Lifter.find_by(name:lifter_name_string)
+    end   
+    exercise = create_exercise_instance(exercise_info_hash)
+
+    new_exercise_log = ExerciseLog.new(date_and_time:DateTime.new(2020,8,16))
+    lifter_check = lifter.exercise_logs.push(new_exercise_log)
+    exercise_check = exercise.exercise_logs.push(new_exercise_log)
+
+
+
 end
 
-create_lifter_instance(patrick)
+
+#--------------------------------------------------------------------------------------------------------------------#
+
+#so much work but now I can populate my database and I have the CRUD implementation to create a new Lifter and Exercise
+
+josh_exercises.each{|exercise|add_lifter_and_exercise_to_log(josh,exercise)}
+patrick_exercises.each{|exercise|add_lifter_and_exercise_to_log(patrick,exercise)}
+john_exercises.each{|exercise|add_lifter_and_exercise_to_log(john,exercise)}
+
+binding.pry
 
 
-#Now let's populate our database with this data
-# Exercise.create(josh_exercises)
-# ExerciseLog.create(josh,john_exercises)
-# josh_exercises.each do |hash|
-#      Exercise.create(hash)
-#     end
+# #josh's exercises
+# #exercise 1
+# add_lifter_and_exercise_to_log(josh,{
+#     name:"Bench Press",
+#     target_muscle_group: "chest",
+#     weight_in_pounds: 300,
+#     reps:5
+# })
 
-# Exercise.create(patrick_exercises)
-# ExerciseLog.create(patrick, patrick_exercises)
-# plants.each{|hash| Plant.create(hash)
+# #exercise 2
 
-# Exercise.create(john_exercises)
-# ExerciseLog.create(john, john_exercises)
-# plants.each{|hash| Plant.create(hash)
+# add_lifter_and_exercise_to_log(josh,{
+#     name:"Deadlift",
+#     target_muscle_group: "lower back",
+#     weight_in_pounds: 350,
+#     reps:5
+# })
+
+# #exercise 3
+# add_lifter_and_exercise_to_log(josh,{
+#     name:"Barbell Rows",
+#     target_muscle_group: "upper back",
+#     weight_in_pounds: 200,
+#     reps:5
+# })
+
+# #exercise 4
+# add_lifter_and_exercise_to_log(josh,{
+#     name: "Barbell Squats",
+#     target_muscle_group: "legs",
+#     weight_in_pounds:275,
+#     reps:5
+# })
+
+binding.pry
 
 
 
-puts "I have successfully seeded our database with ffresh data"
+puts "I have successfully seeded our database with fresh data"
+#--------------------------------------------------------------------------------------#
 
 # Plant.destroy_all
 # Person.destroy_all
@@ -121,6 +191,12 @@ puts "I have successfully seeded our database with ffresh data"
 # Plant.reset_pk_sequence
 # Person.reset_pk_sequence
 # PlantParenthood.reset_pk_sequence
+
+
+
+
+
+
 
 # ########### different ways to write your seeds ############
 

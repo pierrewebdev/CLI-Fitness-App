@@ -4,6 +4,7 @@ class CreateExercises < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :target_muscle_group
       t.integer :weight_in_pounds
+      t.integer :reps
     end
   end
 end
