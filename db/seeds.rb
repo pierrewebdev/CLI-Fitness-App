@@ -1,35 +1,45 @@
+require "pry"
+Exercise.destroy_all
+Exercise.reset_pk_sequence
+Lifter.destroy_all
+Lifter.reset_pk_sequence
+ExerciseLog.destroy_all
+ExerciseLog.reset_pk_sequence
+
+
+
 #seed data for Lifter and Exercise; I will start by creating 3 instances of lifter and setting up exercises for them
-josh = Lifter.new(name:"Josh the Power Lifter")
+josh = "Josh the Power Lifter"
 
 josh_exercises = [ #just keep it simple for now
     {
-        name:"Bench Press"
-        target_muscle_group: "chest"
+        name:"Bench Press",
+        target_muscle_group: "chest",
         weight_in_pounds: 300
     },
     {
         name:"Deadlift",
-        target_muscle_group: "lower back"
+        target_muscle_group: "lower back",
         weight_in_pounds: 350
     },
     {
         name:"Barbell Rows",
-        target_muscle_group: "upper back"
+        target_muscle_group: "upper back",
         weight_in_pounds: 200
     },
     {
         name: "Barbell Squats",
-        target_muscle_group: "legs"
+        target_muscle_group: "legs",
         weight_in_pounds:275
     }
 ]
 
-patrick = Lifter.new(name:"Patrick the fitness enthusiast")
+patrick = "Patrick the fitness enthusiast"
 
 patrick_exercises = [ 
 {
-    name:"Weighted Pull up"
-    target_muscle_group: "chest"
+    name:"Weighted Pull up",
+    target_muscle_group: "chest",
     weight_in_pounds: 200
 },
 {
@@ -49,11 +59,11 @@ patrick_exercises = [
 }
 ]
 
-john = Lifter.new(name:"John the amateur")
+john = "John the amateur"
 
 john_exercises = [ #just keep it simple for now
 {
-    name:"Dumbell press"
+    name:"Dumbell press",
     target_muscle_group: "chest",
     weight_in_pounds:60
 },
@@ -74,46 +84,36 @@ john_exercises = [ #just keep it simple for now
 }
 ]
 
+#Now I need to create a few mwthods that can help me dynamically add things to my database
+#the good thing about doing it this way is that I can reuse the code in all my model files for new users
+
+def create_lifter_instance(name)
+    lifter = Lifter.create(name:name)
+    lifter
+    binding.pry
+end
+
+create_lifter_instance(patrick)
+
+
 #Now let's populate our database with this data
-Exercise.create(josh_exercises)
-ExerciseLog.create(josh,john_exercises)
+# Exercise.create(josh_exercises)
+# ExerciseLog.create(josh,john_exercises)
+# josh_exercises.each do |hash|
+#      Exercise.create(hash)
+#     end
 
-Exercise.create(patrick_exercises)
-ExerciseLog.create(patrick, patrick_exercises)
+# Exercise.create(patrick_exercises)
+# ExerciseLog.create(patrick, patrick_exercises)
+# plants.each{|hash| Plant.create(hash)
 
-Exercise.create(john)
-ExerciseLog.create(john, john_exercises)
-
-
-
-
-
-
-
+# Exercise.create(john_exercises)
+# ExerciseLog.create(john, john_exercises)
+# plants.each{|hash| Plant.create(hash)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-puts "🔥 🔥 🔥 🔥 "
+puts "I have successfully seeded our database with ffresh data"
 
 # Plant.destroy_all
 # Person.destroy_all
