@@ -1,4 +1,4 @@
-require "pry"
+
 Exercise.destroy_all
 Exercise.reset_pk_sequence
 Lifter.destroy_all

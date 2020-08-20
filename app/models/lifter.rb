@@ -25,10 +25,10 @@ class Lifter < ActiveRecord::Base
     end
 
     def get_all_my_exercises
-        if self.exercises.length == 0
-            puts "you have no exercises, but you should definitely add one :)"
-        else
+        if self.exercises.length != 0
             self.exercises.each{|exercise| puts "\nExercise name: #{exercise.name}".colorize(:color => :red).bold+"\n Target Muscle Group: #{exercise.target_muscle_group} \n Number of Reps done: #{exercise.reps}\n Weight(lb): #{exercise.weight_in_pounds}"}
+        else
+            puts "you have no exercises, but you should definitely add one :)"
         end
     end
 

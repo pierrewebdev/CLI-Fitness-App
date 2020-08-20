@@ -20,6 +20,8 @@ class ExerciseLog < ActiveRecord::Base
     new_exercise_log = self.create(date_and_time:date_and_time)
     lifter.exercise_logs.push(new_exercise_log)
     exercise.exercise_logs.push(new_exercise_log)
+
+    binding.pry
   end
 
 

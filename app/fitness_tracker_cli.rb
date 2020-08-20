@@ -54,8 +54,12 @@ class FitnessTrackerCli
     system "clear"
     user.get_all_my_exercises
     next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Create a new exercise and add it to log")
-    menu if next_choice == "Go back to main menu"
-    log_a_new_exercise if next_choice == "Create a new exercise and add it to log"
+    if next_choice == "Go back to main menu"
+      menu
+    elsif next_choice == "Create a new exercise and add it to log"
+      log_a_new_exercise
+      menu
+    end
   end
 
   def see_workout_sessions
@@ -82,7 +86,6 @@ class FitnessTrackerCli
     }
 
     ExerciseLog.add_lifter_and_exercise_to_log(user.name, exercise, time)
-    menu
 
   end
 
