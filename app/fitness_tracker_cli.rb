@@ -52,18 +52,23 @@ class FitnessTrackerCli
 
   def see_exercises
     system "clear"
+    user.reload
     user.get_all_my_exercises
-    next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Create a new exercise and add it to log")
+    next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Create a new exercise and add it to log","Delete an Exercise","Update an exercise")
     if next_choice == "Go back to main menu"
       menu
     elsif next_choice == "Create a new exercise and add it to log"
       log_a_new_exercise
+      menu
+    elsif next_choice == "Update an exercise"
+      update_an_exercise
       menu
     end
   end
 
   def see_workout_sessions
     system "clear"
+    user.reload
     puts "Below is a collection of all of your logged workout sessions:".bold+""
     user.get_all_my_exercise_logs
     next_choice = prompt.select("Ready to go back to the main menu?", "yes")
@@ -87,6 +92,37 @@ class FitnessTrackerCli
 
     ExerciseLog.add_lifter_and_exercise_to_log(user.name, exercise, time)
 
+  end
+
+  def update_an_exercise
+    exercise_to_update = find_exercise_to_update
+    update_choices = ["The name of the exercise", "The number of reps", "The weight for the exercise", "The muscle group that the exercise targets"]
+
+    binding.pry
+    user_choice = prompt.select("what would you like to update about this exercise?", update_choices)
+    case user_choice
+    when "The name of the exercise"
+      name = prompt.ask("What would you like the name to be")
+      exercise_to_update.update(name:name)
+    when "The number of reps"
+      new_rep_count = prompt.ask("What should the rep count be changed to?")
+      exercise_to_update.update(reps:new_rep_count)
+    when "The weight for the exercise"
+      new_weight = prompt.ask("What would you like the weight to be changed to?")
+      exercise_to_update.update(weight_in_pounds:new_weight)
+    when "The muscle group that the exercise targets"
+      new_target = prompt.ask("What would you like to change the target muscle group to?")
+      exercise_to_update.update(target_muscle_group:new_target)
+    end
+  end
+
+  def find_exercise_to_update
+    user_exercise_array = user.exercises
+    exercise_names = user.exercises.map{|exercise|exercise.name}
+    chosen_exercise = prompt.select("Which exercise would you like to update?", exercise_names)
+    
+    exercise_to_update = user_exercise_array.find{|exercise|exercise.name == chosen_exercise}
+    exercise_to_update
   end
 
   def leave_app

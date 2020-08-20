@@ -14,22 +14,9 @@ class Exercise < ActiveRecord::Base
   end #this works
 
   #update---------------------------------------
-  def update_exercise_name(new_name)
-    self.name = new_name 
-  end
+  #use the built in update method for this
 
-  def update_exercise_rep_count(new_rep_count)
-    self.reps = new_rep_count
-  end
-
-  def update_target_muscle_group(new_target)
-    self.target_muscle_group = new_target
-  end
-
-  def update_exercise_weight(new_weight)
-    self.weight_in_pounds = new_weight
-  end
-
+  
   #delete-------------------------------
   def delete_exercise
     self.destroy

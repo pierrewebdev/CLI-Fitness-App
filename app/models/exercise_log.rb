@@ -21,7 +21,6 @@ class ExerciseLog < ActiveRecord::Base
     lifter.exercise_logs.push(new_exercise_log)
     exercise.exercise_logs.push(new_exercise_log)
 
-    binding.pry
   end
 
 
