@@ -17,7 +17,7 @@ class ExerciseLog < ActiveRecord::Base
       exercise = Exercise.create_exercise(exercise_info_hash)
     end
 
-    new_exercise_log = self.new(date_and_time:date_and_time)
+    new_exercise_log = self.create(date_and_time:date_and_time)
     lifter.exercise_logs.push(new_exercise_log)
     exercise.exercise_logs.push(new_exercise_log)
   end
@@ -31,6 +31,10 @@ class ExerciseLog < ActiveRecord::Base
     binding.pry
   end
 
+  #read----------------------------------------
+  def self.find_lifter_exercise_logs(lifter_instance)
+    ExerciseLog.all.select{|log|log.lifter == lifter_instance}
+  end
   #update--------------------------------------
   def update_log_with_new_time(new_time)
     self.update(date_and_time:new_time)

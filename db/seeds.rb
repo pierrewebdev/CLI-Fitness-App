@@ -5,6 +5,8 @@ Lifter.destroy_all
 Lifter.reset_pk_sequence
 ExerciseLog.destroy_all
 ExerciseLog.reset_pk_sequence
+PersonalRecord.destroy_all
+PersonalRecord. reset_pk_sequence
 
 
 
@@ -22,19 +24,19 @@ josh_exercises = [ #just keep it simple for now
         name:"Deadlift",
         target_muscle_group: "lower back",
         weight_in_pounds: 350,
-        reps:5
+        reps:10
     },
     {
         name:"Barbell Rows",
         target_muscle_group: "upper back",
         weight_in_pounds: 200,
-        reps:5
+        reps:15
     },
     {
         name: "Barbell Squats",
         target_muscle_group: "legs",
         weight_in_pounds:275,
-        reps:5
+        reps:20
     }
 ]
 
@@ -139,9 +141,33 @@ asha_exercises = [
 #so much work but now I can populate my database and I have the CRUD implementation to create a new Lifter and Exercise
 
 josh_exercises.each{|exercise|ExerciseLog.add_lifter_and_exercise_to_log(josh,exercise)}
+# josh_exercises.each do |exercise| #I'm creating a new pr for each exercise
+#     exercise_instance = Exercise.find_by(name:exercise[:name])
+#     logged_exercise_instance = ExerciseLog.find_by(exercise_id:exercise_instance.id)
+#     PersonalRecord.create(exercise_log_id:logged_exercise_instance[:id],max_rep_count:logged_exercise_instance.exercise.reps,max_weight:logged_exercise_instance.exercise.weight_in_pounds)
+# end
+
 patrick_exercises.each{|exercise|ExerciseLog.add_lifter_and_exercise_to_log(patrick,exercise)}
+# patrick_exercises.each do |exercise| #I'm creating a new pr for each exercise
+#     exercise_instance = Exercise.find_by(name:exercise[:name])
+#     logged_exercise_instance = ExerciseLog.find_by(exercise_id:exercise_instance.id)
+#     PersonalRecord.create(exercise_log_id:logged_exercise_instance[:id],max_rep_count:logged_exercise_instance.exercise.reps,max_weight:logged_exercise_instance.exercise.weight_in_pounds)
+# end
+
+
 john_exercises.each{|exercise|ExerciseLog.add_lifter_and_exercise_to_log(john,exercise)}
+# john_exercises.each do |exercise| #I'm creating a new pr for each exercise
+#     exercise_instance = Exercise.find_by(name:exercise[:name])
+#     logged_exercise_instance = ExerciseLog.find_by(exercise_id:exercise_instance.id)
+#     PersonalRecord.create(exercise_log_id:logged_exercise_instance[:id],max_rep_count:logged_exercise_instance.exercise.reps,max_weight:logged_exercise_instance.exercise.weight_in_pounds)
+# end
+
 asha_exercises.each{|exercise|ExerciseLog.add_lifter_and_exercise_to_log(asha,exercise)}
+# asha_exercises.each do |exercise| #I'm creating a new pr for each exercise
+#     exercise_instance = Exercise.find_by(name:exercise[:name])
+#     logged_exercise_instance = ExerciseLog.find_by(exercise_id:exercise_instance.id)
+#     PersonalRecord.create(exercise_log_id:logged_exercise_instance[:id],max_rep_count:logged_exercise_instance.exercise.reps,max_weight:logged_exercise_instance.exercise.weight_in_pounds)
+# end
 
 
 puts "I have successfully seeded our database with fresh data"
