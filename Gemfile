@@ -11,3 +11,7 @@ gem "faker"
 
 gem "colorize"
 gem 'activerecord-reset-pk-sequence' #this is supposed to reset the primary key of our database tables
+
+gem "tty-prompt"
+
+gem "formatador"

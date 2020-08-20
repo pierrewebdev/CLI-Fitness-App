@@ -3,7 +3,7 @@ class Exercise < ActiveRecord::Base
   has_many :exercise_logs
   has_many :lifters, through: :exercise_logs
 
-  #method to create a new instance of an exercise
+ #create-----------------------------------------
   def self.create_exercise(exercise_info_hash)
     exercise = self.create(
         name:exercise_info_hash[:name],
@@ -13,7 +13,38 @@ class Exercise < ActiveRecord::Base
     exercise
   end #this works
 
+  #update---------------------------------------
+  def update_exercise_name(new_name)
+    self.name = new_name 
+  end
+
+  def update_exercise_rep_count(new_rep_count)
+    self.reps = new_rep_count
+  end
+
+  def update_target_muscle_group(new_target)
+    self.target_muscle_group = new_target
+  end
+
+  def update_exercise_weight(new_weight)
+    self.weight_in_pounds = new_weight
+  end
+
 
 
 
 end
+
+
+#useful stuff for the cli
+    # if name_of_update == "name"
+    #   puts "please enter a new name for this exercise"
+    #   #self.name = gets.chomp.strip
+    # elsif name_of_update == "reps"
+    #   puts "please enter a new rep count for this exercise"
+    #   #self.reps = gets.chomp.strip
+    # elsif name_of_update == "target muscle group"
+    #   #self.target_muscle_group = gets.chomp.strip
+    # elsif name_of_update == "weight in pounds"
+    #   #self.weight_in_pounds = gets.chomp.strip
+    #end

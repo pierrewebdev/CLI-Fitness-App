@@ -9,7 +9,7 @@ ExerciseLog.reset_pk_sequence
 
 
 #seed data for Lifter and Exercise; I will start by creating 3 instances of lifter and setting up exercises for them
-josh = "Josh Delacruz"
+josh = "josh"
 
 josh_exercises = [ #just keep it simple for now
     {
@@ -38,7 +38,7 @@ josh_exercises = [ #just keep it simple for now
     }
 ]
 
-patrick = "Patrick Pierre"
+patrick = "patrick"
 
 patrick_exercises = [ 
 {
@@ -60,14 +60,14 @@ patrick_exercises = [
     reps:8
 },
 {
-    name: " Barbell Squats",
+    name: "Barbell Squats",
     target_muscle_group: "legs",
     weight_in_pounds: 225,
     reps:8
 }
 ]
 
-john = "John Smithson"
+john = "john"
 
 john_exercises = [ #just keep it simple for now
 {
@@ -96,7 +96,7 @@ john_exercises = [ #just keep it simple for now
 }
 ]
 
-asha = "Asha Harrigan"
+asha = "asha"
 
 asha_exercises = [
     {

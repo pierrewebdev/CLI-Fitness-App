@@ -3,14 +3,13 @@ class ExerciseLog < ActiveRecord::Base
   belongs_to :lifter
   belongs_to :exercise
 
-
+  #method used only to seed my data base
   def self.add_lifter_and_exercise_to_log(lifter_name_string, exercise_info_hash,date_and_time:DateTime.new(2020,8,16))
     lifter = Lifter.find_by(name:lifter_name_string)
     if !lifter
         lifter = Lifter.create_lifter(lifter_name_string)
     end
     #conditional flow above is for lifter instances
-    
     exercise = Exercise.find_by(name:exercise_info_hash[:name],weight_in_pounds:exercise_info_hash[:weight],reps:exercise_info_hash[:reps])
 
     if !exercise
@@ -23,6 +22,23 @@ class ExerciseLog < ActiveRecord::Base
   end
 
 
+
+
+  #create--------------------------------------
+  def self.new_log
+    new_log = self.create(date_and_time:DateTime.now)
+    binding.pry
+  end
+
+  #update--------------------------------------
+  def update_log_with_new_time(new_time)
+    self.update(date_and_time:new_time)
+  end
+
+  def update_log_with_lifter_and_exercise(lifter,exercise)
+    lifter.exercise_logs << self
+    exercise.exercise_logs << self
+  end
 
 
 
