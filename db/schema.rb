@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_230730) do
+ActiveRecord::Schema.define(version: 2020_08_20_030756) do
 
   create_table "exercise_logs", force: :cascade do |t|
     t.datetime "date_and_time"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 2020_08_17_230730) do
 
   create_table "lifters", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "personal_records", force: :cascade do |t|
+    t.integer "max_rep_count"
+    t.integer "max_weight"
+    t.integer "exercise_log_id"
   end
 
 end

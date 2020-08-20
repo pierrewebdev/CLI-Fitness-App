@@ -2,6 +2,7 @@ class ExerciseLog < ActiveRecord::Base
   # add associatons!
   belongs_to :lifter
   belongs_to :exercise
+  has_many :personal_records
 
   #method used only to seed my data base
   def self.add_lifter_and_exercise_to_log(lifter_name_string, exercise_info_hash,date_and_time:DateTime.new(2020,8,16))
