@@ -35,10 +35,19 @@ class ExerciseLog < ActiveRecord::Base
     self.update(date_and_time:new_time)
   end
 
+  #for use with non-associated logs in my Interface
   def update_log_with_lifter_and_exercise(lifter,exercise)
     lifter.exercise_logs << self
     exercise.exercise_logs << self
   end
+
+
+  #delete----------------------------------------
+  def delete_exercise_log
+    self.destroy
+  end
+
+  #can implement a method in lifter to delete all of a lifter's exercises
 
 
 

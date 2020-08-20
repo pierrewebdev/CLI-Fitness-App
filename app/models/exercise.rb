@@ -30,6 +30,14 @@ class Exercise < ActiveRecord::Base
     self.weight_in_pounds = new_weight
   end
 
+  #delete-------------------------------
+  def delete_exercise
+    self.destroy
+  end
+  #can implement a method to delete all of a lifter's exercises
+
+
+
 
 
 

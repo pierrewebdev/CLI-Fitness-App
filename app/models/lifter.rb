@@ -37,5 +37,16 @@ class Lifter < ActiveRecord::Base
         self.name = new_name
     end
 
+    #delete-----------------------------------
+    def delete_all_my_exercises
+        self.exercises.destroy_all
+    end
+
+    #method above also deletes all exercise logs because the exercises and exercise logs are connected through theh macro relationship
+
+    def delete_myself
+        self.destroy
+    end
+
 
 end
