@@ -5,13 +5,13 @@ class ExerciseLog < ActiveRecord::Base
   has_many :personal_records
 
   #method used only to seed my data base
-  def self.add_lifter_and_exercise_to_log(lifter_name_string, exercise_info_hash,date_and_time:DateTime.new(2020,8,16))
+  def self.add_lifter_and_exercise_to_log(lifter_name_string, exercise_info_hash,date_and_time = DateTime.now())
     lifter = Lifter.find_by(name:lifter_name_string)
     if !lifter
         lifter = Lifter.create_lifter(lifter_name_string)
     end
     #conditional flow above is for lifter instances
-    exercise = Exercise.find_by(name:exercise_info_hash[:name],weight_in_pounds:exercise_info_hash[:weight],reps:exercise_info_hash[:reps])
+    exercise = Exercise.find_by(name:exercise_info_hash[:name],weight_in_pounds:exercise_info_hash[:weight_in_pounds],reps:exercise_info_hash[:reps])
 
     if !exercise
       exercise = Exercise.create_exercise(exercise_info_hash)

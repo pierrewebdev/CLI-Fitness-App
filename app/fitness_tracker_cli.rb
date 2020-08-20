@@ -10,7 +10,9 @@ class FitnessTrackerCli
   def run
     welcome
     login_or_signup
-    wanna_see_exercises_you_did?
+    puts "Hold on I'm loading your gains"
+    sleep(1)
+    menu
     # get_joke(what_subject)
   end
 
@@ -18,7 +20,8 @@ class FitnessTrackerCli
   private
 
   def welcome
-    puts "Hello, welcome to the Fitness Tracker"
+    system "clear"
+    puts "Hello, welcome to the Fitness Tracker".bold+""
   end
 
   def get_username
@@ -32,18 +35,59 @@ class FitnessTrackerCli
     @user = Lifter.find_or_create_by(name:username)
   end
 
-  def wanna_see_exercises_you_did?
-    choices = ["See your exercises","Leave app"]
+  def menu
+    system "clear"
+    choices = ["See your exercises","Leave app","See your Personal Records","See all your Workout Sessions"]
     choice = prompt.select("What do you want to do next?",choices)
     if choice == "See your exercises"
-      user.get_all_my_exercises
+      see_exercises
+    elsif choice == "See your Personal Records"
+      puts "this is not finished yet"
+    elsif choice == "See all your Workout Sessions"
+      see_workout_sessions
     else
       leave_app
     end
   end
 
+  def see_exercises
+    system "clear"
+    user.get_all_my_exercises
+    next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Create a new exercise and add it to log")
+    menu if next_choice == "Go back to main menu"
+    log_a_new_exercise if next_choice == "Create a new exercise and add it to log"
+  end
+
+  def see_workout_sessions
+    system "clear"
+    puts "Below is a collection of all of your logged workout sessions:".bold+""
+    user.get_all_my_exercise_logs
+    next_choice = prompt.select("Ready to go back to the main menu?", "yes")
+    menu if next_choice
+  end
+
+  def log_a_new_exercise
+    exercise_name = prompt.ask("What is the name of the exercise you want to add?").downcase
+    exercise_muscle = prompt.ask("What muscle group are you targeting in this exercise?").downcase
+    exercise_weight = prompt.ask("Enter the weight(lb) you will use for this exercise as a number").to_i
+    exercise_reps = prompt.ask("Enter the number of reps you will be doing for this exercise").to_i
+    time = DateTime.now
+
+    #create a hash for the exercises
+    exercise = {
+      name: exercise_name,
+      target_muscle_group: exercise_muscle,
+      weight_in_pounds: exercise_weight,
+      reps: exercise_reps
+    }
+
+    ExerciseLog.add_lifter_and_exercise_to_log(user.name, exercise, time)
+    menu
+
+  end
+
   def leave_app
-    puts "goodbye"
+    puts "Thanks for using the Fitness Tracker....goodbye".bold+""
     system("exit")
   end
 
