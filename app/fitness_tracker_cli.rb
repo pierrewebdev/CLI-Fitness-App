@@ -11,7 +11,7 @@ class FitnessTrackerCli
     welcome
     login_or_signup
     puts "Hold on I'm loading your gains"
-    sleep(2)
+    sleep(2.5)
     menu
     # get_joke(what_subject)
   end
@@ -37,14 +37,32 @@ class FitnessTrackerCli
 
   def menu
     system "clear"
-    choices = ["See your exercises","See all your Workout Sessions","Leave app"]
+    choices = ["See your exercises","See all your Workout Sessions","Leave app","Delete my account and all my data"]
     choice = prompt.select("What do you want to do next?",choices)
     if choice == "See your exercises"
       see_exercises
     elsif choice == "See all your Workout Sessions"
       see_workout_sessions
+    elsif choice == "Delete my account and all my data"
+      delete_my_account
     else
       leave_app
+    end
+  end
+
+  def delete_my_account
+    choice = prompt.select("Are you sure you wish to delete everything", "Yes I am sure", "No")
+    if choice != "No"
+      user.exercises.destroy_all
+      user.exercise_logs.destroy_all
+      user.destroy
+
+      puts "Your account and all saved information has been deleted"
+      puts "Hope you make an account with us again someday"
+      sleep(3)
+      leave_app
+    else
+      menu
     end
   end
 
