@@ -15,25 +15,25 @@ josh = "josh"
 
 josh_exercises = [ #just keep it simple for now
     {
-        name:"Bench Press",
+        name:"bench press",
         target_muscle_group: "chest",
         weight_in_pounds: 300,
         reps:5
     },
     {
-        name:"Deadlift",
+        name:"deadlift",
         target_muscle_group: "lower back",
         weight_in_pounds: 350,
         reps:10
     },
     {
-        name:"Barbell Rows",
+        name:"barbell rows",
         target_muscle_group: "upper back",
         weight_in_pounds: 200,
         reps:15
     },
     {
-        name: "Barbell Squats",
+        name: "barbell squats",
         target_muscle_group: "legs",
         weight_in_pounds:275,
         reps:20
@@ -44,25 +44,25 @@ patrick = "patrick"
 
 patrick_exercises = [ 
 {
-    name:"Weighted Pull up",
+    name:"weighted pull up",
     target_muscle_group: "chest",
     weight_in_pounds: 200,
     reps:8,
 },
 {
-    name:"Weighted Dips",
+    name:"weighted Dips",
     target_muscle_group: "triceps",
     weight_in_pounds: 200,
     reps:8
 },
 {
-    name:"Barbell Rows",
+    name:"barbell rows",
     target_muscle_group: "upper back",
     weight_in_pounds: 165,
     reps:8
 },
 {
-    name: "Barbell Squats",
+    name: "barbell squats",
     target_muscle_group: "legs",
     weight_in_pounds: 225,
     reps:8
@@ -73,25 +73,25 @@ john = "john"
 
 john_exercises = [ #just keep it simple for now
 {
-    name:"Dumbell press",
+    name:"dumbell press",
     target_muscle_group: "chest",
     weight_in_pounds:60,
     reps:2,
 },
 {
-    name:"Deadlift",
+    name:"deadlift",
     target_muscle_group: "lower back",
     weight_in_pounds:80,
     reps:2
 },
 {
-    name:"Lat Pulldown",
+    name:"lat pulldown",
     target_muscle_group: "upper back",
     weight_in_pounds:25,
     reps:8
 },
 {
-    name: "Body Squat",
+    name: "body squat",
     target_muscle_group: "legs",
     weight_in_pounds:120,
     reps:5
@@ -102,31 +102,31 @@ asha = "asha"
 
 asha_exercises = [
     {
-        name:"Glute Bridges",
+        name:"glute bridges",
         target_muscle_group:"glutes",
         weight_in_pounds: 45,
         reps:10
     },
     {
-        name:"Body Squat",
+        name:"body squat",
         target_muscle_group:"legs",
         weight_in_pounds:120, #this is supposed to test if two lifters can have the same exercise
         reps:5
     },
     {
-    name:"Deadlift",
+    name:"deadlift",
     target_muscle_group: "lower back",
     weight_in_pounds:80,
     reps:2
     },
     {
-        name:"Weighted Lunges",
+        name:"weighted lunges",
         target_muscle_group:"legs",
         weight_in_pounds:25,
         reps:15
     },
     {
-        name:"Barbell Rows",
+        name:"barbell rows",
         target_muscle_group:"upper back",
         weight_in_pounds:70,
         reps:8

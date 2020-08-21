@@ -37,12 +37,10 @@ class FitnessTrackerCli
 
   def menu
     system "clear"
-    choices = ["See your exercises","Leave app","See your Personal Records","See all your Workout Sessions"]
+    choices = ["See your exercises","See all your Workout Sessions","Leave app"]
     choice = prompt.select("What do you want to do next?",choices)
     if choice == "See your exercises"
       see_exercises
-    elsif choice == "See your Personal Records"
-      see_personal_records
     elsif choice == "See all your Workout Sessions"
       see_workout_sessions
     else
@@ -194,32 +192,50 @@ class FitnessTrackerCli
   end
 #methods for personal record--------------------------------------------------------------------
 
-def see_personal_records
-  #get all exercise logs
-  user.exercise_logs.each do |log|
-    PersonalRecord.new_personal_record(log)
-  end
+# def see_personal_records
+#   #get all exercise logs
+#   user.exercise_logs.each do |log|
+#     if log.personal_records.length < 1
+#       PersonalRecord.new_personal_record(log)
+#     end
+#   end
 
-  #personal_records = user.exercise_logs.map{|log| log.personal_records}
-  puts "Here is a list of your exercises with your current personal records:\n".bold+""
-  user.exercise_logs.each do |log|
-    puts "Your current record for #{log.exercise.name} is #{log.exercise.reps} reps at #{log.exercise.weight_in_pounds} lbs"
-  end
+#   #personal_records = user.exercise_logs.map{|log| log.personal_records}
+#   puts "Here is a list of your exercises with your current personal records:\n".bold+""
+#   user.exercise_logs.each do |log|
+#     puts "Your current record for #{log.exercise.name} is #{log.exercise.reps} reps at #{log.exercise.weight_in_pounds} lbs"
+#   end
 
-  next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Delete a personal record","Update my personal records")
-    if next_choice == "Go back to main menu"
-      menu
-    elsif next_choice == "Update my personal records"
-      update_an_exercise_with_no_bugs
-      menu
-    elsif next_choice == "Delete a personal record"
-      delete_an_exercise
-      menu
-    end
+#   next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Delete a personal record","Update my personal records")
+#     if next_choice == "Go back to main menu"
+#       menu
+#     elsif next_choice == "Update my personal records"
+#       update_current_personal_records
+#       menu
+#     elsif next_choice == "Delete a personal record"
+#       delete_a_personal_record
+#       menu
+#     end
   
+# end
+
+# def update_current_personal_records
+#   personal_records = user.exercise_logs.map{|log|log.personal_records} #array_of_current_pr's
+#   exercise_array = user.exercises.map{|exercise|exercise.name} #array of exercises
+  
+#   duplicate_name = find_duplicates(exercise_array)
+#   # will be found if the name of the exercise popus up more than once
+#   binding.pry
+
+# end
+
+
+def find_duplicates(arr)
+  h = Hash.new(0)
+  arr.each{|name| h[name] += 1}
+  my_duplicates = h.select{|name,count| name if count > 1}.keys
+  my_duplicates[0]
 end
-
-
 
 
 
