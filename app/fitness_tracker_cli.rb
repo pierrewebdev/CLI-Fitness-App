@@ -42,7 +42,7 @@ class FitnessTrackerCli
     if choice == "See your exercises"
       see_exercises
     elsif choice == "See your Personal Records"
-      puts "this is not finished yet"
+      see_personal_records
     elsif choice == "See all your Workout Sessions"
       see_workout_sessions
     else
@@ -192,6 +192,44 @@ class FitnessTrackerCli
     exercise_to_update = user_exercise_array.find{|exercise|exercise.name == chosen_exercise}
     exercise_to_update
   end
+#methods for personal record--------------------------------------------------------------------
+
+def see_personal_records
+  #get all exercise logs
+  user.exercise_logs.each do |log|
+    PersonalRecord.new_personal_record(log)
+  end
+
+  #personal_records = user.exercise_logs.map{|log| log.personal_records}
+  puts "Here is a list of your exercises with your current personal records:\n".bold+""
+  user.exercise_logs.each do |log|
+    puts "Your current record for #{log.exercise.name} is #{log.exercise.reps} reps at #{log.exercise.weight_in_pounds} lbs"
+  end
+
+  next_choice = prompt.select("What do you want to do now".bold+"", "Go back to main menu","Delete a personal record","Update my personal records")
+    if next_choice == "Go back to main menu"
+      menu
+    elsif next_choice == "Update my personal records"
+      update_an_exercise_with_no_bugs
+      menu
+    elsif next_choice == "Delete a personal record"
+      delete_an_exercise
+      menu
+    end
+  
+end
+
+
+
+
+
+
+
+
+
+
+
+
 
   def leave_app
     puts "Thanks for using the Fitness Tracker....goodbye".bold+""

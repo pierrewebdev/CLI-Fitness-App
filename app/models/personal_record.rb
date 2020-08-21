@@ -3,8 +3,9 @@ class PersonalRecord < ActiveRecord::Base
     belongs_to :exercise_log
 
     #create----------------------------------
-    def new_personal_record(exercise_log_instance)
-        new_pr = PersonalRecord.create(max_rep_count:exercise_log_instance.exercise.reps,max_weight:sexercise_log_instance.weight_in_pounds)
+    def self.new_personal_record(exercise_log_instance)
+        new_pr = PersonalRecord.create(max_rep_count:exercise_log_instance.exercise.reps,max_weight:exercise_log_instance.exercise.weight_in_pounds)
+        exercise_log_instance.personal_records << new_pr
     end
 
     #update-----------------------------------
