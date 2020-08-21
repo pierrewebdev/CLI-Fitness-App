@@ -15,8 +15,10 @@ class Lifter < ActiveRecord::Base
     end
 
     def get_all_my_exercise_logs #all the lifter's workout sessions #note Sywlia said this is redundant because I already have a method that can do this for me
-        if self.exercise_logs.length == 0 || self.exercises.length == 0
+        if self.exercise_logs.length == 0 || self.exercises.length == 0 
             puts "you have no work out sessions logged at this time but you should definitely add one :)"
+        # elsif self.exercise_logs.any?(nil)
+        #     puts "you have no valid exercises at this time, so try making one"
         else
             self.exercise_logs.each do |workout_session|
                 puts "You had a workout session on#{workout_session.date_and_time.strftime(" %m/%d/%Y")} and you focused on doing: #{workout_session.exercise.name}"

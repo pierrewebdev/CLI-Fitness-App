@@ -50,6 +50,46 @@ class FitnessTrackerCli
     end
   end
 
+ #methods for exercise log--------------------------------------------------------------
+  def exercise_log_options
+    see_workout_sessions
+    choices = ["Ready to go back to the main menu?","Update one of my workout sessions", "Delete a workout session"]
+    next_choice = prompt.select("What do you want to do next?", choices)
+    case next_choice
+    when "Ready to go back to the main menu?"
+      menu
+    when "Update one of my workout sessions"
+    when "Delete a workout session"
+    end
+
+
+  end
+
+
+
+  def see_workout_sessions
+    system "clear"
+    user.reload
+    puts "Below is a collection of all of your logged workout sessions:".bold+""
+    user.get_all_my_exercise_logs
+    choice = prompt.select("What do you want to do now?".bold+"", "Go back to the previous menu")
+    case choice
+      when "Go back to the previous menu"
+        menu
+      end
+
+
+
+  end
+
+  def update_a_workout_session
+
+  end
+
+
+
+
+  #methods for exercises--------------------------------------------------------------------
   def see_exercises
     system "clear"
     user.reload
@@ -67,15 +107,6 @@ class FitnessTrackerCli
       delete_an_exercise
       menu
     end
-  end
-
-  def see_workout_sessions
-    system "clear"
-    user.reload
-    puts "Below is a collection of all of your logged workout sessions:".bold+""
-    user.get_all_my_exercise_logs
-    next_choice = prompt.select("Ready to go back to the main menu?", "yes")
-    menu if next_choice
   end
 
   def log_a_new_exercise
@@ -103,6 +134,7 @@ class FitnessTrackerCli
   def delete_an_exercise
     if user.exercises.length != 0
       exercise = find_exercise_to_delete
+      exercise.exercise_logs.destroy_all
       exercise.destroy
     else
       puts "You don't have any exercises so you can't do this right now"
