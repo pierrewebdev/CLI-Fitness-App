@@ -11,7 +11,7 @@ class FitnessTrackerCli
     welcome
     login_or_signup
     puts "Hold on I'm loading your gains"
-    sleep(1)
+    sleep(2)
     menu
     # get_joke(what_subject)
   end
@@ -61,7 +61,10 @@ class FitnessTrackerCli
       log_a_new_exercise
       menu
     elsif next_choice == "Update an exercise"
-      update_an_exercise
+      update_an_exercise_with_no_bugs
+      menu
+    elsif next_choice == "Delete an Exercise"
+      delete_an_exercise
       menu
     end
   end
@@ -94,11 +97,44 @@ class FitnessTrackerCli
 
   end
 
+
+
+
+  def delete_an_exercise
+    if user.exercises.length != 0
+      exercise = find_exercise_to_delete
+      exercise.destroy
+    else
+      puts "You don't have any exercises so you can't do this right now"
+      puts "I will take you back to the previous menu"
+      sleep(3.5)
+    end
+  end
+
+  def find_exercise_to_delete
+    user_exercise_array = user.exercises
+    exercise_names = user.exercises.map{|exercise|exercise.name}
+    chosen_exercise = prompt.select("Which exercise would you like to delete?", exercise_names)
+    
+    exercise_to_delete = user_exercise_array.find{|exercise|exercise.name == chosen_exercise}
+    exercise_to_delete
+  end
+
+
+
+  def update_an_exercise_with_no_bugs
+    if user.exercises.length != 0
+      update_an_exercise
+    else
+      puts "You don't have any exercises so you can't do this right now"
+      puts "I will take you back to the previous menu"
+      sleep(3.5)
+    end
+  end
+
   def update_an_exercise
     exercise_to_update = find_exercise_to_update
     update_choices = ["The name of the exercise", "The number of reps", "The weight for the exercise", "The muscle group that the exercise targets"]
-
-    binding.pry
     user_choice = prompt.select("what would you like to update about this exercise?", update_choices)
     case user_choice
     when "The name of the exercise"
